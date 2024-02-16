@@ -78,12 +78,11 @@ cd pghashlib${ver} &&
 make
 make install
 
-# install extension
-sudo su - postgres -c "psql -U postgres -c 'CREATE EXTENSION hashlib;'"
-sudo su - postgres -c "psql -U postgres -c \"select encode(hash128_string('abcdefg', 'murmur3'), 'hex');\""
-# ### pghashlib
-
-
 sudo systemctl daemon-reload
 sudo systemctl enable postgresql@${ver}-main.service || true
 sudo systemctl start postgresql@${ver}-main.service
+
+
+sudo su - postgres -c "psql -U postgres -c 'CREATE EXTENSION hashlib;'"
+sudo su - postgres -c "psql -U postgres -c \"select encode(hash128_string('abcdefg', 'murmur3'), 'hex');\""
+# ### pghashlib
